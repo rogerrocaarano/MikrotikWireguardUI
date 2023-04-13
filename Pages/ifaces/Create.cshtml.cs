@@ -42,5 +42,7 @@ namespace MikrotikWireguardUI.Pages.ifaces
 
             return RedirectToPage("./Index");
         }
+        
+        
     }
 }

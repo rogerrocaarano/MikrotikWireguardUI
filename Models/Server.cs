@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using mikrotikWireguardHandler;
 
 namespace MikrotikWireguardUI.Models;
 
@@ -12,4 +13,16 @@ public class Server
     public bool Ssl { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
+
+    public static mikrotikApiClient CreateApiClient(Server server)
+    {
+        var apiClient = new mikrotikApiClient(
+            server.Fqdn,
+            server.Port,
+            server.Ssl,
+            server.Username,
+            server.Password
+        );
+        return apiClient;
+    }
 }
