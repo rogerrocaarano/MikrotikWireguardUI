@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikrotikWireguardUI", "MikrotikWireguardUI.csproj", "{67D61BC8-3928-4397-ACEC-CD393DC261A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mikrotikWireguardHandler", "..\mikrotikWireguardHandler\mikrotikWireguardHandler.csproj", "{1215BB98-86FB-4E43-B4C0-65C1A31A3F61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67D61BC8-3928-4397-ACEC-CD393DC261A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D61BC8-3928-4397-ACEC-CD393DC261A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D61BC8-3928-4397-ACEC-CD393DC261A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D61BC8-3928-4397-ACEC-CD393DC261A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1215BB98-86FB-4E43-B4C0-65C1A31A3F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1215BB98-86FB-4E43-B4C0-65C1A31A3F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1215BB98-86FB-4E43-B4C0-65C1A31A3F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1215BB98-86FB-4E43-B4C0-65C1A31A3F61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
