@@ -26,7 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Helpers\" />
       <Folder Include="Pages\ifaces\" />
       <Folder Include="Pages\servers\" />
     </ItemGroup>
