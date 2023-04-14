@@ -32,14 +32,19 @@ namespace MikrotikWireguardUI.Pages.ifaces
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Iface == null || Iface == null)
+            if (
+                // !ModelState.IsValid ||   // This validation is removed because we are only
+                                            // setting name and ServerId parameters from the model.
+                _context.Iface == null ||
+                Iface == null
+                )
             {
                 return Page();
             }
-
-            _context.Iface.Add(Iface);
+            
+            await Iface.NewInterfaceOnServer(Iface, _context);
             await _context.SaveChangesAsync();
-
+            
             return RedirectToPage("./Index");
         }
         

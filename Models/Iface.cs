@@ -1,4 +1,5 @@
 using mikrotikWireguardHandler;
+using mikrotikWireguardHandler.RestApiObjects;
 using MikrotikWireguardUI.Data;
 
 namespace MikrotikWireguardUI.Models;
@@ -41,5 +42,16 @@ public class Iface
                 db.Iface.Add(iface);
             }
         }
+    }
+
+    public static async Task NewInterfaceOnServer(Iface iface, ApplicationDbContext db)
+    {
+        var server = db.Server.Find(iface.ServerId);
+        var apiClient = Models.Server.CreateApiClient(server);
+        var wg = new WireguardServer(apiClient);
+        var wgIface = new WireguardInterface();
+        wgIface.Name = iface.Name;
+        await wg.NewInterface(wgIface);
+        await RefreshServerInterfaces(apiClient, server, db);
     }
 }
