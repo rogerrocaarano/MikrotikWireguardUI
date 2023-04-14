@@ -14,7 +14,7 @@ public class Server
     public string Username { get; set; }
     public string Password { get; set; }
 
-    public static mikrotikApiClient CreateApiClient(Server server)
+    public static WireguardServer GetWgServer(Server server)
     {
         var apiClient = new mikrotikApiClient(
             server.Fqdn,
@@ -23,6 +23,6 @@ public class Server
             server.Username,
             server.Password
         );
-        return apiClient;
+        return new WireguardServer(apiClient);
     }
 }

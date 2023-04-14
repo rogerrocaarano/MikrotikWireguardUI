@@ -13,10 +13,10 @@ public class Iface
     public int ServerId { get; set; }
     public Server Server { get; set; }
     
-    public static async Task RefreshServerInterfaces(mikrotikApiClient apiClient, Server server, ApplicationDbContext db)
+    public static async Task RefreshServerInterfaces(Server server, ApplicationDbContext db)
     {
         // Get all interfaces.
-        var wg = new WireguardServer(apiClient);
+        var wg = Models.Server.GetWgServer(server);
         await wg.UpdateInterfaces();
         // Update database.
         foreach (var apiServerIface in wg.Interfaces)
@@ -47,11 +47,10 @@ public class Iface
     public static async Task NewInterfaceOnServer(Iface iface, ApplicationDbContext db)
     {
         var server = db.Server.Find(iface.ServerId);
-        var apiClient = Models.Server.CreateApiClient(server);
-        var wg = new WireguardServer(apiClient);
+        var wg = Models.Server.GetWgServer(server);
         var wgIface = new WireguardInterface();
         wgIface.Name = iface.Name;
         await wg.NewInterface(wgIface);
-        await RefreshServerInterfaces(apiClient, server, db);
+        await RefreshServerInterfaces(server, db);
     }
 }

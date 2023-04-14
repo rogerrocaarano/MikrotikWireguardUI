@@ -34,8 +34,7 @@ namespace MikrotikWireguardUI.Pages.ifaces
         {
             foreach (var server in _context.Server)
             {
-                var apiClient = Models.Server.CreateApiClient(server);
-                await Models.Iface.RefreshServerInterfaces(apiClient, server, _context);
+                await Models.Iface.RefreshServerInterfaces(server, _context);
             }
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
