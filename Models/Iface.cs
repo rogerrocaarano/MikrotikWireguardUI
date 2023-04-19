@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using mikrotikWireguardHandler;
 using mikrotikWireguardHandler.RestApiObjects;
 using MikrotikWireguardUI.Data;
@@ -12,9 +13,12 @@ public class Iface
     public string? PublicKey { get; set; }
     public int ServerId { get; set; }
     public Server Server { get; set; }
-    
-    public static async Task RefreshServerInterfaces(Server server, ApplicationDbContext db)
+    public string? RosId { get; set; }
+    public int? PortNumber { get; set; }
+
+    public static async Task GetTable(Server server, ApplicationDbContext db)
     {
+        await CleanTable(db);
         // Get all interfaces.
         var wg = Models.Server.GetWgServer(server);
         await wg.UpdateInterfaces();
@@ -26,8 +30,10 @@ public class Iface
                 Name = apiServerIface.Name,
                 PrivateKey = apiServerIface.PrivateKey,
                 PublicKey = apiServerIface.PublicKey,
+                RosId = apiServerIface.RosId,
                 ServerId = server.Id,
-                Server = server
+                Server = server,
+                PortNumber = apiServerIface.ListenPort
             };
             var inDb = false;
             foreach (var dbIface in db.Iface)
@@ -44,13 +50,50 @@ public class Iface
         }
     }
 
-    public static async Task NewInterfaceOnServer(Iface iface, ApplicationDbContext db)
+    public static async Task Create(Iface iface, ApplicationDbContext db)
     {
         var server = db.Server.Find(iface.ServerId);
         var wg = Models.Server.GetWgServer(server);
-        var wgIface = new WireguardInterface();
-        wgIface.Name = iface.Name;
+        var wgIface = new WireguardInterface
+        {
+            Name = iface.Name,
+            ListenPort = iface.PortNumber
+        };
         await wg.NewInterface(wgIface);
-        await RefreshServerInterfaces(server, db);
+        await GetTable(server, db);
     }
+
+    public static async Task CleanTable(ApplicationDbContext db)
+    {
+        foreach (var server in db.Server)
+        {
+            var wireguardServer = Models.Server.GetWgServer(server);
+            await wireguardServer.UpdateInterfaces();
+            var validRosIds = new List<string>();
+            wireguardServer.Interfaces.ForEach(i=>validRosIds.Add(i.RosId));
+            foreach (var iface in db.Iface)
+            {
+                if (iface.ServerId != server.Id) continue;
+                if (!validRosIds.Exists(x => x == iface.RosId))
+                {
+                    db.Iface.Remove(iface);
+                }
+            }
+        }
+    }
+
+    public static async Task Delete(Iface iface, ApplicationDbContext db)
+    {
+        var server = db.Server.Find(iface.ServerId);
+        var wireguardServer = Models.Server.GetWgServer(server);
+        await wireguardServer.UpdateInterfaces();
+        var wireguardIface = new WireguardInterface
+        {
+            Name = iface.Name
+        };
+        await wireguardServer.DeleteInterface(wireguardIface);
+        db.Iface.Remove(iface);
+    }
+    
+    
 }

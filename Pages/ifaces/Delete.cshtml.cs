@@ -53,7 +53,8 @@ namespace MikrotikWireguardUI.Pages.ifaces
             if (iface != null)
             {
                 Iface = iface;
-                _context.Iface.Remove(Iface);
+                // _context.Iface.Remove(Iface);
+                await Models.Iface.Delete(Iface, _context);
                 await _context.SaveChangesAsync();
             }
 

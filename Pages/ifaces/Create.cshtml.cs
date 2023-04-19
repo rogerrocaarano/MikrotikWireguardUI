@@ -42,7 +42,7 @@ namespace MikrotikWireguardUI.Pages.ifaces
                 return Page();
             }
             
-            await Iface.NewInterfaceOnServer(Iface, _context);
+            await Iface.Create(Iface, _context);
             await _context.SaveChangesAsync();
             
             return RedirectToPage("./Index");

@@ -23,6 +23,7 @@ public class Server
             server.Username,
             server.Password
         );
-        return new WireguardServer(apiClient);
+        var wireguardServer = new WireguardServer(apiClient);
+        return wireguardServer;
     }
 }

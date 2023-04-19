@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MikrotikWireguardUI.Data;
 
@@ -10,9 +11,11 @@ using MikrotikWireguardUI.Data;
 namespace MikrotikWireguardUI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230414172514_IfaceAddPortNumber")]
+    partial class IfaceAddPortNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -223,7 +226,7 @@ namespace MikrotikWireguardUI.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PortNumber")
+                    b.Property<int>("PortNumber")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PrivateKey")
