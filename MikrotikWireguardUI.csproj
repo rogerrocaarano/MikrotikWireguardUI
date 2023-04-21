@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <Folder Include="Pages\ifaces\" />
+      <Folder Include="Pages\peers\" />
       <Folder Include="Pages\servers\" />
     </ItemGroup>
 

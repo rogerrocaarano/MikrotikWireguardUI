@@ -219,12 +219,78 @@ namespace MikrotikWireguardUI.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("Comment")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PortNumber")
+                    b.Property<string>("Disabled")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ListenPort")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Mtu")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PrivateKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PublicKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RosId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Running")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ServerId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServerId");
+
+                    b.ToTable("Iface");
+                });
+
+            modelBuilder.Entity("MikrotikWireguardUI.Models.Peer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AllowedAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CurrentEndpointAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CurrentEndpointPort")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Disabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("EndpointAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EndpointPort")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("IfaceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Interface")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastHandshake")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PrivateKey")
                         .HasColumnType("TEXT");
@@ -240,9 +306,11 @@ namespace MikrotikWireguardUI.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IfaceId");
+
                     b.HasIndex("ServerId");
 
-                    b.ToTable("Iface");
+                    b.ToTable("Peer");
                 });
 
             modelBuilder.Entity("MikrotikWireguardUI.Models.Server", b =>
@@ -332,6 +400,25 @@ namespace MikrotikWireguardUI.Data.Migrations
                         .HasForeignKey("ServerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Server");
+                });
+
+            modelBuilder.Entity("MikrotikWireguardUI.Models.Peer", b =>
+                {
+                    b.HasOne("MikrotikWireguardUI.Models.Iface", "Iface")
+                        .WithMany()
+                        .HasForeignKey("IfaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikrotikWireguardUI.Models.Server", "Server")
+                        .WithMany()
+                        .HasForeignKey("ServerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Iface");
 
                     b.Navigation("Server");
                 });

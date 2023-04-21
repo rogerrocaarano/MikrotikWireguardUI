@@ -1,0 +1,97 @@
+@page
+@model MikrotikWireguardUI.Pages.peers.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Peer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Peer.Id" />
+            <div class="form-group">
+                <label asp-for="Peer.IfaceId" class="control-label"></label>
+                <select asp-for="Peer.IfaceId" class="form-control" asp-items="ViewBag.IfaceId"></select>
+                <span asp-validation-for="Peer.IfaceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.ServerId" class="control-label"></label>
+                <select asp-for="Peer.ServerId" class="form-control" asp-items="ViewBag.ServerId"></select>
+                <span asp-validation-for="Peer.ServerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.RosId" class="control-label"></label>
+                <input asp-for="Peer.RosId" class="form-control" />
+                <span asp-validation-for="Peer.RosId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.AllowedAddress" class="control-label"></label>
+                <input asp-for="Peer.AllowedAddress" class="form-control" />
+                <span asp-validation-for="Peer.AllowedAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.Comment" class="control-label"></label>
+                <input asp-for="Peer.Comment" class="form-control" />
+                <span asp-validation-for="Peer.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.CurrentEndpointAddress" class="control-label"></label>
+                <input asp-for="Peer.CurrentEndpointAddress" class="form-control" />
+                <span asp-validation-for="Peer.CurrentEndpointAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.CurrentEndpointPort" class="control-label"></label>
+                <input asp-for="Peer.CurrentEndpointPort" class="form-control" />
+                <span asp-validation-for="Peer.CurrentEndpointPort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.Disabled" class="control-label"></label>
+                <input asp-for="Peer.Disabled" class="form-control" />
+                <span asp-validation-for="Peer.Disabled" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.EndpointAddress" class="control-label"></label>
+                <input asp-for="Peer.EndpointAddress" class="form-control" />
+                <span asp-validation-for="Peer.EndpointAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.EndpointPort" class="control-label"></label>
+                <input asp-for="Peer.EndpointPort" class="form-control" />
+                <span asp-validation-for="Peer.EndpointPort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.Interface" class="control-label"></label>
+                <input asp-for="Peer.Interface" class="form-control" />
+                <span asp-validation-for="Peer.Interface" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.LastHandshake" class="control-label"></label>
+                <input asp-for="Peer.LastHandshake" class="form-control" />
+                <span asp-validation-for="Peer.LastHandshake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.PublicKey" class="control-label"></label>
+                <input asp-for="Peer.PublicKey" class="form-control" />
+                <span asp-validation-for="Peer.PublicKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peer.PrivateKey" class="control-label"></label>
+                <input asp-for="Peer.PrivateKey" class="form-control" />
+                <span asp-validation-for="Peer.PrivateKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

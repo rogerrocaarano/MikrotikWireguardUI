@@ -12,4 +12,5 @@ public class ApplicationDbContext : IdentityDbContext
     }
     public DbSet<MikrotikWireguardUI.Models.Server> Server { get; set; } = default!;
     public DbSet<MikrotikWireguardUI.Models.Iface> Iface { get; set; } = default!;
+    public DbSet<MikrotikWireguardUI.Models.Peer> Peer { get; set; } = default!;
 }
