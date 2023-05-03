@@ -30,5 +30,15 @@ namespace MikrotikWireguardUI.Pages.peers
                 .Include(p => p.Server).ToListAsync();
             }
         }
+        
+        public async Task<IActionResult> OnPostRefreshPeers()
+        {
+            foreach (var server in _context.Server)
+            {
+                await Models.Peer.GetTable(server, _context);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
     }
 }

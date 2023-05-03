@@ -1,5 +1,5 @@
 @page
-@model MikrotikWireguardUI.Pages.peers.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,65 +7,56 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div class="btn-group">
+    <form method="post" asp-page-handler="RefreshPeers">
+        <button
+            type="submit"
+            class="btn btn-secondary">
+            Refresh Peers
+        </button>
+    </form>
+    <a
+        asp-page="Create"
+        class="btn btn-secondary">
+        New Peer
+    </a>
+</div>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].Iface)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].Server)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].RosId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].AllowedAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].Comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].CurrentEndpointAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].CurrentEndpointPort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].Disabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].EndpointAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].EndpointPort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].Interface)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].LastHandshake)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].PublicKey)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peer[0].PrivateKey)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Peer[0].Disabled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peer[0].Server)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peer[0].Interface)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peer[0].RosId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peer[0].AllowedAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peer[0].PublicKey)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Peer) {
+    @foreach (var item in Model.Peer)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Iface.Id)
+                @Html.DisplayFor(modelItem => item.Disabled)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Server.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Interface)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RosId)
@@ -74,34 +65,7 @@
                 @Html.DisplayFor(modelItem => item.AllowedAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentEndpointAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentEndpointPort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Disabled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndpointAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndpointPort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Interface)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastHandshake)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.PublicKey)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrivateKey)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -109,6 +73,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

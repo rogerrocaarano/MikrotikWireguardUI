@@ -96,7 +96,7 @@ public class Iface : WireguardInterface
     }
 
     /// <summary>
-    /// Updates an interface on from iface view, if it doesn't exists, creates a new record on the database.
+    /// Updates an interface from iface view, if it doesn't exists, creates a new record on the database.
     /// </summary>
     /// <param name="iface">Iface object to update/create.</param>
     /// <param name="db">Database context.</param>
